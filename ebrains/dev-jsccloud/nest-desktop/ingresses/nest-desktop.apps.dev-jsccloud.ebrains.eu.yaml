@@ -1,0 +1,69 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: >-
+      [{"addresses":[""],"port":443,"protocol":"HTTPS","serviceName":"nest-desktop:nest-desktop","ingressName":"nest-desktop:nest-desktop.apps.dev-jsccloud.ebrains.eu","hostname":"nest-desktop.apps.dev-jsccloud.ebrains.eu","path":"/","allNodes":false}]
+  creationTimestamp: '2026-06-19T14:19:58Z'
+  generation: 8
+  managedFields:
+    - apiVersion: networking.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      manager: traefik
+      operation: Update
+      subresource: status
+      time: '2026-06-19T14:19:58Z'
+    - apiVersion: networking.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:field.cattle.io/publicEndpoints: {}
+        f:spec:
+          f:defaultBackend:
+            .: {}
+            f:service:
+              .: {}
+              f:name: {}
+              f:port: {}
+          f:ingressClassName: {}
+          f:rules: {}
+          f:tls: {}
+      manager: agent
+      operation: Update
+      time: '2026-06-19T15:32:12Z'
+  name: nest-desktop.apps.dev-jsccloud.ebrains.eu
+  namespace: nest-desktop
+  resourceVersion: '50461657'
+  uid: 65f60791-ab75-4c5c-adb1-b1bf510b1b5c
+spec:
+  defaultBackend:
+    service:
+      name: nest-desktop
+      port:
+        number: 8080
+  ingressClassName: rke2-ingress-nginx-migration
+  rules:
+    - host: nest-desktop.apps.dev-jsccloud.ebrains.eu
+      http:
+        paths:
+          - backend:
+              service:
+                name: nest-desktop
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - nest-desktop.apps.dev-jsccloud.ebrains.eu
+      secretName: nest-desktop-apps-dev-jsccloud-tls
+status:
+  loadBalancer:
+    ingress:
+      - hostname: ing.dev-jsccloud.ebrains.eu

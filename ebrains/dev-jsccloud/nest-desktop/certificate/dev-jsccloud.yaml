@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "dev-jsccloud"
+  cluster:
+    server: "https://rancher.dev-jsccloud.ebrains.eu/k8s/clusters/c-4qp8z"
+
+users:
+- name: "dev-jsccloud"
+  user:
+    token: "kubeconfig-u-pgn6id7xqofqslj:8dh2cj9rfvmzgwc4lfx27vs8g96tk5mnz9nwsvvzvmws96mtxmgwwm"
+
+
+contexts:
+- name: "dev-jsccloud"
+  context:
+    user: "dev-jsccloud"
+    cluster: "dev-jsccloud"
+
+current-context: "dev-jsccloud"

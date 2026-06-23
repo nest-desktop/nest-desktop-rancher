@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  OIDC_CRYPTO_PASSPHRASE: It should be a random value.
+  OIDC_ISSUER: https://iam.ebrains.eu/auth/realms/hbp
+kind: ConfigMap
+metadata:
+  creationTimestamp: '2026-06-19T13:43:30Z'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:OIDC_CRYPTO_PASSPHRASE: {}
+          f:OIDC_ISSUER: {}
+      manager: agent
+      operation: Update
+      time: '2026-06-19T14:16:15Z'
+  name: iam.ebrains.eu
+  namespace: nest-desktop
+  resourceVersion: '50417853'
+  uid: 3a51f7e2-98d5-43e5-8aad-6e5f2392254e

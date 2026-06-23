@@ -1,0 +1,77 @@
+apiVersion: v1
+data:
+  vhost.conf: |
+    ServerName "${HOSTNAME}"
+
+    <VirtualHost *:8080>
+
+        # The OIDC service provider. For EBRAINS, it is here:
+        OIDCProviderMetadataURL "${OIDC_ISSUER}/.well-known/openid-configuration"
+        OIDCClientID "${OIDC_CLIENT_ID}"
+        OIDCClientSecret "${OIDC_CLIENT_SECRET}"
+
+        # /redirect_uri is used to authenticate you.
+        # It will be consumed by Apache
+        # this request will not be forwarded to your application.
+        OIDCRedirectURI "${HOSTNAME}/redirect_uri"
+        OIDCCryptoPassphrase "${OIDC_CRYPTO_PASSPHRASE}"
+
+        # Interval in seconds after which the session will be invalidated when no interaction has occurred.
+        # When not defined, the default is 300 seconds.
+        OIDCSessionInactivityTimeout 3600
+
+        # Maximum duration of the application session
+        # When not defined the default is 8 hours (3600 * 8 seconds).
+        # When set to 0, the session duration will be set equal to the expiry time of the ID token.
+        # NB: this can be overridden on a per-OP basis in the .conf file using the key: session_max_duration
+        OIDCSessionMaxDuration 0
+
+        # Time to live in seconds for state parameter
+        # i.e. the interval in which the authorization request.
+        OIDCStateTimeout 7200
+
+        # Clean up old cookie states if needed.
+        OIDCStateMaxNumberOfCookies 5 true
+
+        <Location "/">
+            AuthType openid-connect
+            Require valid-user
+        </Location>
+
+        # This handles proxying.
+        ProxyAddHeaders On
+        ProxyRequests Off
+        ProxyPreserveHost On
+
+        # special url used by mod oidc, do not proxy
+        ProxyPass /redirect_uri !
+
+        #
+        # forward traffic to services
+        #
+
+        # NEST Simulator
+        ProxyPass /nest http://${NEST_DESKTOP_SERVICE_HOST}:52425/
+        ProxyPassReverse /nest http://${NEST_DESKTOP_SERVICE_HOST}:52425/
+
+        # NEST Desktop
+        ProxyPass / http://${NEST_DESKTOP_SERVICE_HOST}:54286/
+        ProxyPassReverse / http://${NEST_DESKTOP_SERVICE_HOST}:54286/
+    </VirtualHost>
+kind: ConfigMap
+metadata:
+  creationTimestamp: '2026-06-19T13:42:19Z'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:vhost.conf: {}
+      manager: agent
+      operation: Update
+      time: '2026-06-19T13:42:19Z'
+  name: apache2-oidc
+  namespace: nest-desktop
+  resourceVersion: '50398426'
+  uid: 7b695cc3-d26e-47a1-96c6-a0b2e2f8d962

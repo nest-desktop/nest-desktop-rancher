@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nest-desktop-apps-tls
+  namespace: nest-desktop
+spec:
+  # The name of the secret to be created (CHANGE ME!)
+  secretName: nest-desktop-apps-tls
+  renewBefore: 120h
+  # The public-facing hostname (CHANGE example-application to your name!)
+  commonName: nest-desktop.apps.ebrains.eu
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+    - server auth
+  dnsNames:
+    # (CHANGE ME! same as <commonName>)
+    - nest-desktop.apps.ebrains.eu
+  issuerRef:
+    name: letsencrypt-production-issuer-dns-1
+    kind: ClusterIssuer

@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: '2026-06-19T14:18:22Z'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8080,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":52425,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":54286,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: agent
+      operation: Update
+      time: '2026-06-19T14:51:08Z'
+  name: nest-desktop
+  namespace: nest-desktop
+  resourceVersion: '50438054'
+  uid: ff2b6ecf-13c6-4e4a-8cc3-84627421b820
+spec:
+  clusterIP: 10.43.215.247
+  clusterIPs:
+    - 10.43.215.247
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: auth
+      port: 8080
+      protocol: TCP
+      targetPort: auth
+    - name: frontend
+      port: 54286
+      protocol: TCP
+      targetPort: frontend
+    - name: nest
+      port: 52425
+      protocol: TCP
+      targetPort: nest
+  selector:
+    io.kompose.service: nest-desktop
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

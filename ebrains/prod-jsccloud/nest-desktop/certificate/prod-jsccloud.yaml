@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: "prod-jsccloud"
+  cluster:
+    server: "https://rancher.prod-jsccloud.ebrains.eu/k8s/clusters/c-hddjb"
+
+users:
+- name: "prod-jsccloud"
+  user:
+    token: "kubeconfig-u-7cyamytec7px7jg:kqg5md96kjgr8xmlczrxmnsmqw7v2dtqvp7zq68np2fqsfczdqncjb"
+
+
+contexts:
+- name: "prod-jsccloud"
+  context:
+    user: "prod-jsccloud"
+    cluster: "prod-jsccloud"
+
+current-context: "prod-jsccloud"
