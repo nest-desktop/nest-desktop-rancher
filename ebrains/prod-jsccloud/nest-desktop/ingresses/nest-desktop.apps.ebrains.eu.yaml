@@ -5,8 +5,18 @@ metadata:
     field.cattle.io/publicEndpoints: >-
       [{"addresses":[""],"port":443,"protocol":"HTTPS","serviceName":"nest-desktop:nest-desktop","ingressName":"nest-desktop:nest-desktop.apps.ebrains.eu","hostname":"nest-desktop.apps.ebrains.eu","path":"/","allNodes":false}]
   creationTimestamp: '2026-06-19T15:33:29Z'
-  generation: 1
+  generation: 2
   managedFields:
+    - apiVersion: networking.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      manager: traefik
+      operation: Update
+      subresource: status
+      time: '2026-06-19T15:33:29Z'
     - apiVersion: networking.k8s.io/v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -26,20 +36,10 @@ metadata:
           f:tls: {}
       manager: agent
       operation: Update
-      time: '2026-06-19T15:33:29Z'
-    - apiVersion: networking.k8s.io/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:status:
-          f:loadBalancer:
-            f:ingress: {}
-      manager: traefik
-      operation: Update
-      subresource: status
-      time: '2026-06-19T15:33:29Z'
+      time: '2026-07-20T09:40:13Z'
   name: nest-desktop.apps.ebrains.eu
   namespace: nest-desktop
-  resourceVersion: '41874378'
+  resourceVersion: '91577979'
   uid: 6c61299e-bc05-4462-90e4-b7991003010e
 spec:
   defaultBackend:
@@ -47,7 +47,7 @@ spec:
       name: nest-desktop
       port:
         number: 8080
-  ingressClassName: rke2-ingress-nginx-migration
+  ingressClassName: traefik
   rules:
     - host: nest-desktop.apps.ebrains.eu
       http:
