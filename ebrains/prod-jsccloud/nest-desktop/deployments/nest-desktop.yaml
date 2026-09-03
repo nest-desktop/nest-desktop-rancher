@@ -138,7 +138,7 @@ spec:
       containers:
         - env:
             - name: NEST_SIMULATOR_URL
-              value: https://nest-desktop.apps.prod-jsccloud.ebrains.eu/nest
+              value: https://nest-desktop.apps.ebrains.eu/nest
           image: docker-registry.ebrains.eu/nest/nest-desktop:4.2
           imagePullPolicy: Always
           name: nest-desktop
